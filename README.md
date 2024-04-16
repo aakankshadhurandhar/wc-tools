@@ -22,11 +22,11 @@ Install dependencies
 
 ```bash
   mvn clean package
-  source ~/.bash_profile
+  source .bash_profile
 ```
 
 Start the server
 
 ```bash
-  ccwc --name Adam
+  ccwc --c file_name #count no of bytes of file
 ```

@@ -8,10 +8,14 @@ import picocli.CommandLine;
  */
 public class App
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
         WcTool helloWorld= new WcTool();
+        CommandLine commandLine = new CommandLine(helloWorld);
+        commandLine.setExecutionStrategy(new CommandLine.RunLast());
         int exitCode =  new CommandLine(helloWorld).execute(args);
+        String result = helloWorld.call();
+        System.out.println(result);
         System.exit(exitCode);
     }
 }

@@ -13,36 +13,45 @@ public class Result {
         this.file = file;
     }
 
-    public String count(boolean countBytes,boolean countLines,boolean countWords) throws IOException {
+    public String count(boolean countBytes, boolean countLines, boolean countWords, boolean countCharacters)
+            throws IOException {
         var bytes = Files.readAllBytes(Path.of(this.file.toURI()));
-
-
 
         if (!this.file.exists()) {
             throw new FileNotFoundException("File " + this.file.getAbsolutePath() + "does not exist");
         }
         if (countBytes) {
-            return this.file.length() +" " +file.getName();
+            return this.file.length() + " " + file.getName();
         }
-        if (countLines){
-            var i=0;
+        if (countLines) {
+            var i = 0;
             for (byte byte2 : bytes) {
-                if (byte2=='\n'){
+                if (byte2 == '\n') {
                     i++;
                 }
             }
-            return i + " " +file.getName();
+            return i + " " + file.getName();
         }
-        if (countWords){
-            var i=0;
+        if (countWords) {
+            var i = 0;
             for (byte byte2 : bytes) {
-                if (byte2==' '){
+                if (byte2 == ' ') {
                     i++;
                 }
             }
-            return i + " " +file.getName();
+            return i + " " + file.getName();
         }
-        else {
+        if (countCharacters) {
+
+            String s = new String(bytes);
+            var j = 0;
+            for (char ch : s.toCharArray()) {
+                if (Character.isLetter(ch)) {
+                    j++;
+                }
+            }
+            return j + " " + file.getName();
+        } else {
             return "Processing " + this.file.getName();
         }
 

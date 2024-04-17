@@ -16,12 +16,18 @@ public class Result {
     public String count(boolean countBytes, boolean countLines, boolean countWords, boolean countCharacters)
             throws IOException {
         var bytes = Files.readAllBytes(Path.of(this.file.toURI()));
-
+        StringBuilder result = new StringBuilder();
         if (!this.file.exists()) {
             throw new FileNotFoundException("File " + this.file.getAbsolutePath() + "does not exist");
         }
+        if(!countBytes && !countLines && !countWords && !countCharacters) {
+            countBytes = true;
+            countLines = true;
+            countWords = true;
+            countCharacters = true;
+        }
         if (countBytes) {
-            return this.file.length() + " " + file.getName();
+            result.append(this.file.length()+" ");
         }
         if (countLines) {
             var i = 0;
@@ -30,7 +36,7 @@ public class Result {
                     i++;
                 }
             }
-            return i + " " + file.getName();
+            result.append(i+" ");
         }
         if (countWords) {
             var i = 0;
@@ -39,7 +45,7 @@ public class Result {
                     i++;
                 }
             }
-            return i + " " + file.getName();
+            result.append(i+" ");
         }
         if (countCharacters) {
 
@@ -50,11 +56,10 @@ public class Result {
                     j++;
                 }
             }
-            return j + " " + file.getName();
-        } else {
-            return "Processing " + this.file.getName();
+            result.append(j+" ");
         }
-
+        result.append(" "+this.file.getName());
+        return result.toString();
     }
 
 }

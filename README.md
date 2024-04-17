@@ -33,4 +33,25 @@ Run CLI tool
   ccwc --w file_name #count no of words in file
   ccwc file_name #default options
 ```
+### DEMO
 
+## count bytes
+
+![countbytes](assests/countbytes.png)
+
+## count characters
+
+
+![countcharacters](assests/countcharacters.png)
+
+## count lines
+
+![countlines](assests/countlines.png)
+
+## count words
+
+![countwords](assests/countwords.png)
+
+## default option
+
+![defaultoptions](assests/defaultoption.png)

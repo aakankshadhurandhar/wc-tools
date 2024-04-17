@@ -15,14 +15,15 @@ public class WcTool implements Callable<String> {
     private boolean countBytes;
     @Option(names = { "--l" }, description = "count lines")
     private boolean countLines;
-
+    @Option (names = { "--w" }, description = "count words")
+    private boolean countWords;
     @Override
     public String call() throws Exception {
         if (!this.file.exists()) {
         throw new FileNotFoundException("File " + this.file.getAbsolutePath() + "does not exist");
         }
 
-        return new Result(this.file).count(countBytes,countLines);
+        return new Result(this.file).count(countBytes,countLines,countWords);
     }
 
 }

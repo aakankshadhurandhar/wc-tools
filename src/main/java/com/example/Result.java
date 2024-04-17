@@ -13,7 +13,7 @@ public class Result {
         this.file = file;
     }
 
-    public String count(boolean countBytes,boolean countLines) throws IOException {
+    public String count(boolean countBytes,boolean countLines,boolean countWords) throws IOException {
         var bytes = Files.readAllBytes(Path.of(this.file.toURI()));
 
 
@@ -30,7 +30,15 @@ public class Result {
                 if (byte2=='\n'){
                     i++;
                 }
-
+            }
+            return i + " " +file.getName();
+        }
+        if (countWords){
+            var i=0;
+            for (byte byte2 : bytes) {
+                if (byte2==' '){
+                    i++;
+                }
             }
             return i + " " +file.getName();
         }

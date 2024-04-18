@@ -1,25 +1,19 @@
 package com.example;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class Result {
-    private final File file;
+    private final byte[] bytes;
+    private final String fileName;
 
-    Result(File file) {
-        this.file = file;
+    public Result(byte[] bytes,String fileName) {
+        this.bytes = bytes;
+        this.fileName = fileName;
     }
 
     public String count(boolean countBytes, boolean countLines, boolean countWords, boolean countCharacters)
             throws IOException {
-        var bytes = Files.readAllBytes(Path.of(this.file.toURI()));
         StringBuilder result = new StringBuilder();
-        if (!this.file.exists()) {
-            throw new FileNotFoundException("File " + this.file.getAbsolutePath() + "does not exist");
-        }
         if(!countBytes && !countLines && !countWords && !countCharacters) {
             countBytes = true;
             countLines = true;
@@ -27,7 +21,7 @@ public class Result {
             countCharacters = true;
         }
         if (countBytes) {
-            result.append(this.file.length()+" ");
+            result.append(bytes.length+" ");
         }
         if (countLines) {
             var i = 0;
@@ -58,7 +52,7 @@ public class Result {
             }
             result.append(j+" ");
         }
-        result.append(" "+this.file.getName());
+        result.append(" "+fileName);
         return result.toString();
     }
 

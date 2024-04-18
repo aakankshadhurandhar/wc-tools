@@ -14,8 +14,6 @@ public class App
         CommandLine commandLine = new CommandLine(helloWorld);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
         int exitCode =  new CommandLine(helloWorld).execute(args);
-        String result = helloWorld.call();
-        System.out.println(result);
         System.exit(exitCode);
     }
 }
